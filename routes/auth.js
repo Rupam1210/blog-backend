@@ -33,7 +33,7 @@ router.post("/login",async(req,res)=>{
          res.cookie("token",token
          ).status(200).json(info)
     } catch (error) {
-        res.status(500).json(error)
+        res.status(500).json(error) 
     }
 })
 // logout
