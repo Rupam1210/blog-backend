@@ -24,8 +24,8 @@ const connectdb = async()=>{
 dotenv.config();
 app.use("/images",express.static(path.join(__dirname,"/images")))
 app.use(cors(
-    {origin:[process.env.FRONTEND_URL],
-    methods: ["GET", "POST", "PUT", "DELETE"],
+    {origin:" http://localhost:5173", 
+    
     credentials:true}))
 app.use(express.json());
 app.use(cookieParser());
@@ -38,7 +38,7 @@ app.use("/api/coments",commentRoute)
 const storage=multer.diskStorage({
     destination:(req,file,fn)=>{
         fn(null,"images")
-    },
+    }, 
     filename:(req,file,fn)=>{
         fn(null,req.body.img)
         // fn(null,"image1.png")
@@ -51,9 +51,12 @@ app.post("/api/upload",upload.single("file"),(req,res)=>{
     // console.log(req.body)
     res.status(200).json("Image has been uploaded successfully!")
 })
- 
+app.get("/",(req,res)=>{
+    res.send("nice working")
+})
 app.listen(process.env.PORT,()=>{
     connectdb();
     console.log(`app is running on localhost:${process.env.PORT}`)
    
 })
+
