@@ -24,7 +24,7 @@ const connectdb = async()=>{
 dotenv.config();
 app.use("/images",express.static(path.join(__dirname,"/images")))
 app.use(cors(
-    { origin: [process.env.FRONTEND_URL],
+    { origin: "*",
         methods: ["GET", "POST", "PUT", "DELETE"],
         credentials: true,}))
 app.use(express.json());
