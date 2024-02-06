@@ -30,7 +30,7 @@ router.post("/login",async(req,res)=>{
         }
         const token=jwt.sign({_id: user._id,username:user.username,email:user.email},process.env.SECRET,{expiresIn:"3d"})
         const {password,...info}= user._doc
-         res.cookie("token",token
+         res.cookie("token",token,{sameSite:"none",secure:true}
          ).status(200).json(info)
     } catch (error) {
         res.status(500).json(error) 
